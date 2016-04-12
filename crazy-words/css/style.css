@@ -1,0 +1,116 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	font-family: Georgia, serif;
+	font-size: 18px;
+	background-color: #f1f5fa;
+	cursor: url('../images/cursor.ico'), default;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+.back-btn {
+	cursor: url('../images/cursor-xl.ico'), auto;
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding: 10px;
+	color: #333;
+	letter-spacing: 1px;
+	font-size: 18px;
+	padding-bottom: 4px;
+	text-decoration: none;
+}
+.back-btn:hover {
+	border-right: 3px double #999;
+	border-bottom: 3px double #999;
+}
+
+.ff-impact {
+	font-family: Impact, Charcoal, sans-serif;
+}
+
+.ff-palatino {
+	font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+}
+
+.ff-centurygothic {
+	font-family: 'Century Gothic', sans-serif;
+}
+
+.ff-lucida {
+	font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+}
+
+.ff-times {
+	font-family: 'Times New Roman', Times, serif;
+}
+
+.ff-arialblack {
+	font-family: 'Arial Black', Gadget, sans-serif;
+}
+
+.ff-copperplate {
+	font-family: 'Copperplate', 'Copperplate Gothic Light', sans-serif;
+}
+
+.ff-courier {
+	font-family: 'Courier New', Courier, monospace;
+}
+
+article {
+	padding: 0 5%;
+	padding-bottom: 100px;
+	overflow: hidden;
+}
+header { padding-top: 20px; }
+h1 { font-size: 10vw; }
+aside {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 85px;
+	text-align: center;
+	background-color: #fff;
+}
+aside > div {
+	padding: 5px;
+}
+aside button {
+	font-size: 12px;
+	display: inline-block;
+	border: 0;
+	padding: 5px;
+	margin: 5px;
+	background-color: #f1f5fa;
+	outline: none;
+}
+aside button:hover {
+	cursor: url('../images/cursor-xl.ico'), auto;
+	background-color: #fff;
+}
+
+.right { text-align: right; }
+.fright { float: right; }
+.left { text-align: left; }
+.fleft { float: left; }
+.middle { text-align: center; }
+
+.pl-med { padding-left: 50px; }
+.pt-sml { padding-top: 40px; }
+.pt-med { padding-top: 70px; }
+.pt-lrg { padding-top: 120px; }
+.word { display: block; }
+.word span { display: inline-block; }
+.fz-s 	{ font-size: 2vw; }
+.fz-m 	{ font-size: 3vw; }
+.fz-l 	{ font-size: 4vw; }
+.fz-xl 	{ font-size: 5vw; }
+.fz-xxl { font-size: 6vw; }
+.fz-xxxl{ font-size: 7vw; }

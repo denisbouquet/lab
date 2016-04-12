@@ -1,0 +1,69 @@
+<!doctype html>
+<html class="no-js">
+<head>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Crazy words JavaScript - by Denis Bouquet, Web Developer</title>
+		<meta name="description" content="JavaScript text animation experiment using TweenMax with timeline and staggerTo in combination with the Greensock plugin splitText.">
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="css/style.css">
+		<!--[if IE]><link rel="shortcut icon" href="images/favicons/favicon.ico"><![endif]-->
+		<link rel="apple-touch-icon" href="http://www.denisbouquet.com/favicons/apple-touch-icon.png">
+		<link rel="icon" href="http://www.denisbouquet.com/favicons/favicon.png">
+		<meta property="og:image" content="http://www.denisbouquet.com/lab/crazy-words/images/hero.png" />
+	</head>
+</head>
+<body>
+	<div id="main">
+		<a href="../" class="back-btn" title="Go back">Back</a>
+		
+		<article>
+			<header class="middle">
+				<h1>Crazy words</h1>
+			</header>
+			
+			<div class="word right">
+				<span class="fz-xl play pt-sml" data-anim="anim-jump">Jumpiiiing!!!</span>
+			</div>
+			<div class="word">
+				<span class="fz-xxl ff-copperplate pt-med" data-anim="anim-fade">Shiny elephant</span>
+			</div>
+			<div class="word">
+				<span class="fz-m ff-impact fright" data-anim="anim-immobile">IMMOBILE<br />IMMOBILE<br />IMMOBILE</span>
+			</div>
+			<div class="word pl-med">
+				<span class="fz-xl ff-impact pt-med" data-anim="anim-flip">Bacon</span>
+			</div>
+			<div class="word middle">
+				<span class="fz-xxl ff-lucida pt-med" data-anim="anim-twist">Twist Boogie Boogie</span>
+			</div>
+			<div class="word fright">
+				<span class="fz-xxxl ff-times pt-lrg" data-anim="anim-up">Thumbs up!</span>
+			</div>
+			<div class="word left">
+				<span class="fz-xl ff-centurygothic play pt-med" data-anim="anim-bounce">YooooooY</span>
+			</div>
+			
+			<aside>
+				<div>
+					<button class="ff-courier explode">Explode</button>
+					<button class="ff-courier reset">Reset</button>
+				</div>
+			</aside>
+		</article>
+	</div>
+	
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/TweenMax.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-41061617-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+</body>
+</html>

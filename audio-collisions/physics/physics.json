@@ -1,0 +1,43 @@
+{ 
+    
+    "triangle_4": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   0, 261  ,  151, 0  ,  170, 33  ,  170, 37  ,  42, 259  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   0, 261  ,  151, 0  ,  170, 33  ,  170, 37  ,  42, 259  ]
+        }
+    ]
+    , 
+    "triangle_3": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   55, 257  ,  178, 47  ,  190, 71  ,  82, 258  ,  73, 261  ,  55, 261  ]
+        }
+    ]
+    , 
+    "triangle_2": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   210, 106  ,  120, 261  ,  95, 261  ,  197, 82  ]
+        }
+    ]
+    , 
+    "triangle_1": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   300, 261  ,  134, 261  ,  216, 116  ]
+        }
+    ]
+}

@@ -1,0 +1,109 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	font-size: 14px;
+	font-family: 'Gill Sans', sans-serif;
+	-webkit-font-smoothing: antialiased; 
+	font-weight: lighter;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+.back-btn {
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding: 10px;
+	color: #333;
+	letter-spacing: 1px;
+	font-size: 18px;
+	text-decoration: none;
+	z-index: 100;
+	font-weight: normal;
+}
+.h1 {
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	font-size: 18px;
+	color: #333;
+	letter-spacing: 1px;
+	top: 0;
+	font-weight: normal;
+}
+.intructions {
+	position: fixed;
+	width: 300px;
+	height: 160px;
+	background-color: rgba(255,255,255,.9);
+	border: 2px solid #0e2f65;
+	top: 50%;
+	left: 50%;
+	z-index: 800;
+	margin-top: -80px;
+	margin-left: -150px;
+	cursor: pointer;
+	border-radius: 15px;
+}
+.intructions p {
+	margin: 0;
+	padding: 20px 20px 10px;
+	border-radius: 15px;
+	font-size: 16px;
+}
+.current-location {
+	position: absolute;
+	right: 20px;
+	top: 70px;
+	z-index: 999;
+	border: 2px solid #0e2f65;
+	background-color: rgba(255,255,255,.9);
+	cursor: pointer;
+	color: #c17b00;
+	font-size: 14px;
+	padding: 6px 10px;
+	border-radius: 15px;
+	font-family: 'Gill Sans', sans-serif;
+	font-weight: lighter;
+}
+.current-location:hover, .current-location[disabled=disabled], .current-location:disabled {
+	background-color: #0e2f65;
+	color: #fff;
+}
+.back-btn:hover {
+	opacity: 0.8;
+}
+.map-wrapper > div {
+	margin-top: 50px;
+    width: 100%;
+    height: 800px;
+    height: calc(100vh - 50px);
+}
+.hide-visually {
+	display: none;
+}
+.name {
+	font-size: 17px;
+	color: #c17b00;
+}
+.show-direction .showOnMap, .show-direction .showDirectionTitle {
+	display: block;
+	color: #999;
+}
+.showOnMap, .showDirectionTitle {
+	display: none;
+}
+ul {
+	margin: 0 0 10px 0;
+}
+.showOnMap li {
+	cursor: pointer;
+}
+.showOnMap li:hover, .showOnMap li.selected {
+	color: #000;
+}
