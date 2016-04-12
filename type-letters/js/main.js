@@ -34,137 +34,131 @@ if(!m&&!n){c.AddContact(l),l.m_flags|=box2d.b2ContactFlag.e_islandFlag;var o=k.o
 },Phaser.Physics.Box2D.Polygon.prototype.at=function(a){var b=this.vertices.length;return this.vertices[0>a?a%b+b:a%b]},Phaser.Physics.Box2D.Polygon.prototype.indicesAreAdjacent=function(a,b){if(a%=this.vertices.length,b%=this.vertices.length,a==b)return!0;var c=Math.abs(a-b);return 2>c?!0:c==this.vertices.length-1?!0:!1},Phaser.Physics.Box2D.Polygon.prototype.areaInTriangle=function(a,b,c){return a=this.at(a),b=this.at(b),c=this.at(c),.5*((b.x-a.x)*(c.y-a.y)-(c.x-a.x)*(b.y-a.y))},Phaser.Physics.Box2D.Polygon.prototype.left=function(a,b,c){return this.areaInTriangle(a,b,c)>0},Phaser.Physics.Box2D.Polygon.prototype.leftOn=function(a,b,c){return this.areaInTriangle(a,b,c)>=0},Phaser.Physics.Box2D.Polygon.prototype.right=function(a,b,c){return this.areaInTriangle(a,b,c)<0},Phaser.Physics.Box2D.Polygon.prototype.rightOn=function(a,b,c){return this.areaInTriangle(a,b,c)<=0},Phaser.Physics.Box2D.Polygon.sqdist=function(a,b){var c=b.x-a.x,d=b.y-a.y;return c*c+d*d},Phaser.Physics.Box2D.Polygon.prototype.makeCCW=function(){for(var a=0,b=1,c=this.vertices.length;c>b;b++)(this.at(b).y<this.at(a).y||this.at(b).y===this.at(a).y&&this.at(b).x>this.at(a).x)&&(a=b);return this.left(a-1,a,a+1)?!1:(this.vertices.reverse(),!0)},Phaser.Physics.Box2D.Polygon.prototype.isConvex=function(){for(var a=!1,b=!1,c=0,d=this.vertices.length;d>c;c++){var e=c,f=(c+1)%d,g=(c+2)%d;this.areaInTriangle(this.vertices[e],this.vertices[f],this.vertices[g])>0?a=!0:b=!0}return b^a},Phaser.Physics.Box2D.Polygon.prototype.isReflex=function(a){return this.right(a-1,a,a+1)},Phaser.Physics.Box2D.Polygon.areVecsEqual=function(a,b){return a.x==b.x&&a.y==b.y},Phaser.Physics.Box2D.Polygon.linesCross=function(a,b,c,d){if(Phaser.Physics.Box2D.Polygon.areVecsEqual(b,c)||Phaser.Physics.Box2D.Polygon.areVecsEqual(a,c)||Phaser.Physics.Box2D.Polygon.areVecsEqual(b,d)||Phaser.Physics.Box2D.Polygon.areVecsEqual(a,d))return null;var e={};box2d.b2SubVV(b,a,e),box2d.b2CrossVS(e,1,e);var f=box2d.b2DotVV(e,a),g=box2d.b2DotVV(e,c),h=box2d.b2DotVV(e,d);if(g>f&&h>f)return null;if(f>g&&f>h)return null;var i={};box2d.b2SubVV(d,c,i),box2d.b2CrossVS(i,1,i);var g=box2d.b2DotVV(i,c),f=box2d.b2DotVV(i,a),j=box2d.b2DotVV(i,b);if(f>g&&j>g)return null;if(g>f&&g>j)return null;var k=(g-f)/(j-f),l={x:a.x+k*(b.x-a.x),y:a.y+k*(b.y-a.y)};return l},Phaser.Physics.Box2D.Polygon.prototype.canSee=function(a,b){if(this.indicesAreAdjacent(a,b))return!1;if(this.leftOn(a+1,a,b)&&this.rightOn(a-1,a,b))return!1;for(var c=0;c<this.vertices.length;++c)if((c+1)%this.vertices.length!=a&&c!=a&&this.leftOn(a,b,c+1)&&this.rightOn(a,b,c)&&Phaser.Physics.Box2D.Polygon.linesCross(this.at(a),this.at(b),this.at(c),this.at(c+1)))return!1;return!0},Phaser.Physics.Box2D.Polygon.prototype.subPolygon=function(a,b){var c=new Phaser.Physics.Box2D.Polygon;if(b>a)for(var d=a;b+1>d;d++)c.addVertex(this.at(d));else{for(var d=a;d<this.vertices.length;d++)c.addVertex(this.at(d));for(var d=0;b+1>d;d++)c.addVertex(this.at(d))}return c},Phaser.Physics.Box2D.Polygon.prototype.decomposeOptimal=function(a){if("undefined"==typeof a&&(a=0),a>1)return this.vertices;this.makeCCW();for(var b=[],c=[],d=[],e=Number.MAX_VALUE,f=0;f<this.vertices.length;f++)if(this.isReflex(f))for(var g=0;g<this.vertices.length;g++)this.canSee(f,g)&&(c=this.subPolygon(f,g).decompose(a+1),d=this.subPolygon(g,f).decompose(a+1),c.length+d.length<e&&(b=c.concat(d),e=b.length));return 0===b.length&&b.push(this.vertices),b},Phaser.Physics.Box2D.Polygon.prototype.decompose=function(a){"undefined"==typeof a&&(a=0),this.makeCCW();for(var b,c,d=[],e=Number.MAX_VALUE,f=!1,g=0;g<this.vertices.length;g++)if(this.isReflex(g)){f=!0;for(var h=this.at(g),i=0;i<this.vertices.length;i++)if(this.canSee(g,i)){var j=this.at(i),k=j.x-h.x,l=j.y-h.y,m=k*k*l*l;e>m&&(b=g,c=i,e=m)}}if(!f&&this.vertices.length>8&&(b=0,c=Math.floor(this.vertices.length/2),f=!0),f){var n=this.subPolygon(b,c).decompose(a+1),o=this.subPolygon(c,b).decompose(a+1);d=n.concat(o)}return 0===d.length&&d.push(this.vertices),d};
 
 
-// Site js object
-var Site;
+// LetterPrototype js object
+var LetterPrototype;
+var game;
+// Images
+var letterArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',  'V',  'W',  'X',  'Y',  'Z', 'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c0'];
+// Sounds var
+var type1, type2;
+// Text var
+var result = 'Debug mode, press SPACEBAR to close';
+
+var debugKey;
+var shouldDebug = false;
+
+var readyToChange = true;
 
 (function ($) {
-  'use strict'; 
+	'use strict'; 
   
-  Site = {
-	/**
-	 * Tabs for each product on tactile device
-	 *
-	 */
-	init: function (elt) {
-		this.playground();
-	},
-	playground: function(){
-		
+	LetterPrototype = {
 		/**
 		* @description - Typing experiment
 		*/
-        if($('#phaserCanvas').length > 0) {
-            var game = new Phaser.Game('100%', '100%', Phaser.CANVAS, 'phaserCanvas', { preload: preload, create: create, render: render }, true);
-        }
-
-		function preload() {
+		init: function (elt) {
+			var self = this;
+			if($('#phaserCanvas').length > 0) {
+				game = new Phaser.Game('100%', '100%', Phaser.CANVAS, 'phaserCanvas', { preload: self.preload, create: self.create, render: self.render }, true);
+			}
+		},
+		preload: function(){
+			
 			game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
 
 			// Images - loop 
-            var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split("");
-            $.each(alphabet, function(letter) {
-                // console.log(alphabet[letter]);
-                game.load.image('letter_'+alphabet[letter], 'images/'+alphabet[letter].toLowerCase()+'.png');
-            });
+			var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split("");
+			$.each(alphabet, function(letter) {
+				// console.log(alphabet[letter]);
+				game.load.image('letter_'+alphabet[letter], 'images/'+alphabet[letter].toLowerCase()+'.png');
+			});
 			
 			// Load our physics data exported from PhysicsEditor
 			game.load.physics('physicsData', 'physics/physics.json');
 
 			// Load sounds
-            game.load.audio('type1', 'sounds/194797_jim-ph_vintage-keyboard-3.mp3');
+			game.load.audio('type1', 'sounds/194797_jim-ph_vintage-keyboard-3.mp3');
 			game.load.audio('type2', 'sounds/181000_ueffects_r-key.mp3');
-		}
-
-		// Images
-        var letterArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',  'V',  'W',  'X',  'Y',  'Z', 'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c0'];
-		// Sounds var
-		var type1, type2;
-		// Text var
-		var result = 'Debug mode, press SPACEBAR to close';
-
-		var debugKey;
-		var shouldDebug = false;
-
-        var readyToChange = true;
-
-		function create() {
+		},
+		create: function(){
 
 			// Add audio
-            type1 = game.add.audio('type1');
+			type1 = game.add.audio('type1');
 			type2 = game.add.audio('type2');
 		
 			// Enable Box2D physics
 			game.physics.startSystem(Phaser.Physics.BOX2D);
 			game.physics.box2d.friction = 0.8;    
-            game.physics.box2d.gravity.y = 200;
-            // Add bounce-less fixtures
-            game.physics.box2d.restitution = 0.8;
-            game.physics.box2d.setBoundsToWorld();
+			game.physics.box2d.gravity.y = 200;
+			// Add bounce-less fixtures
+			game.physics.box2d.restitution = 0.8;
+			game.physics.box2d.setBoundsToWorld();
 
-            // Capture keyboard event
-            game.input.keyboard.addCallbacks(this, null, null, addPhaserLetter);
+			// Capture keyboard event
+			game.input.keyboard.addCallbacks(this, null, null, LetterPrototype.addPhaserLetter);
 
-            // Cursors (2 for tablets)
+			// Cursors (2 for tablets)
 			game.input.addPointer();
 			game.input.addPointer();
 
 			// Set up handlers for mouse events            
-			game.input.onDown.add(mouseDragStart, this);
-			game.input.addMoveCallback(mouseDragMove, this);
-			game.input.onUp.add(mouseDragEnd, this);
+			game.input.onDown.add(LetterPrototype.mouseDragStart, this);
+			game.input.addMoveCallback(LetterPrototype.mouseDragMove, this);
+			game.input.onUp.add(LetterPrototype.mouseDragEnd, this);
 			
 
-            // Debug info toggle
+			// Debug info toggle
 			debugKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-			debugKey.onDown.add(toggleDebug);
+			debugKey.onDown.add(LetterPrototype.toggleDebug);
 
-            // Simulate press "type" - when ready
-            addPhaserLetter('t');
-            setTimeout(function(){ addPhaserLetter('y'); },300);
-            setTimeout(function(){ addPhaserLetter('p'); },500);
-            setTimeout(function(){ addPhaserLetter('e'); },700);
-		}
+			// Simulate press "type" - when ready
+			LetterPrototype.addPhaserLetter('t');
+			setTimeout(function(){ LetterPrototype.addPhaserLetter('y'); },300);
+			setTimeout(function(){ LetterPrototype.addPhaserLetter('p'); },500);
+			setTimeout(function(){ LetterPrototype.addPhaserLetter('e'); },700);
 
-        function addPhaserLetter(e) {
-            var currentLet = e.toUpperCase();
-            var currentLetOrNumber = currentLet;
-            // console.log(currentLet);
-            // console.log(currentLetOrNumber);
-            if(!isNaN(currentLet)) {
-                // if number add "c" in front because it can't be just 1,2,3 as variable name
-                currentLetOrNumber = 'c'+currentLet.toString();
-            }
+			// mobile vairation
+			LetterPrototype.addFieldMobile();
+		}, 
+		addPhaserLetter: function(e){
+			var currentLet = e.toUpperCase();
+			var currentLetOrNumber = currentLet;
+			// console.log(currentLet);
+			// console.log(currentLetOrNumber);
+			if(!isNaN(currentLet)) {
+				// if number add "c" in front because it can't be just 1,2,3 as variable name
+				currentLetOrNumber = 'c'+currentLet.toString();
+			}
 
-            // only for available caracters create >> do the show
-            if(jQuery.inArray( currentLetOrNumber, letterArr ) != -1)
-            {   
-                // Play sound
-                type1.play();
-                // Add sprite
-                letterArr[currentLet] = game.add.sprite(game.world.centerX, window.innerHeight-100, 'letter_'+currentLet);
-                // Enable box2d
-                game.physics.box2d.enable(letterArr[currentLet]);
-                // Clear image square shape
-                letterArr[currentLet].body.clearFixtures();
-                // Add vector letter shape from json coordinates
-                letterArr[currentLet].body.loadPolygon('physicsData', currentLetOrNumber.toLowerCase(), letterArr[currentLet]);
-                // Propulse the char up
-                letterArr[currentLet].body.velocity.y = -900;
-                letterArr[currentLet].body.velocity.x = Math.floor(Math.random() * 400) - 200;
-                // letterArr[currentLet].alpha = 0.5 + Math.random() * 0.5;
-                // Check for the block hitting another object
-                // letterArr[currentLet].body.setCategoryPostsolveCallback(0x0001, callback, this);
-            }
-            else {
-                // Play different sound for unavailable chars
-                type2.play();
-            }
-        }
-
-		
-		// This function will be called every timestep while the ship is contacting the world boundaries.
-		function callback(body1, body2, fixture1, fixture2, contact, impulseInfo) {
+			// only for available caracters create >> do the show
+			if(jQuery.inArray( currentLetOrNumber, letterArr ) != -1)
+			{   
+				// Play sound
+				type1.play();
+				// Add sprite
+				letterArr[currentLet] = game.add.sprite(game.world.centerX, window.innerHeight-100, 'letter_'+currentLet);
+				// Enable box2d
+				game.physics.box2d.enable(letterArr[currentLet]);
+				// Clear image square shape
+				letterArr[currentLet].body.clearFixtures();
+				// Add vector letter shape from json coordinates
+				letterArr[currentLet].body.loadPolygon('physicsData', currentLetOrNumber.toLowerCase(), letterArr[currentLet]);
+				// Propulse the char up
+				letterArr[currentLet].body.velocity.y = -900;
+				letterArr[currentLet].body.velocity.x = Math.floor(Math.random() * 400) - 200;
+				// letterArr[currentLet].alpha = 0.5 + Math.random() * 0.5;
+				// Check for the block hitting another object
+				// letterArr[currentLet].body.setCategoryPostsolveCallback(0x0001, callback, this);
+			}
+			else {
+				// Play different sound for unavailable chars
+				type2.play();
+			}
+		},
+		callback: function(body1, body2, fixture1, fixture2, contact, impulseInfo){
 			
+			// This function will be called every timestep while the ship is contacting the world boundaries.
+				
 			//  The block hit something.
 			//  
 			//  This callback is sent 5 arguments:
@@ -178,40 +172,43 @@ var Site;
 			//  The first argument may be null or not have a sprite property, such as when you hit the world bounds.
 
 
-            // body1.sprite.alpha = 0.5 + Math.floor(Math.random() * 5);
-            
-            // if(readyToChange) {
-            //     body1.sprite.tint = Math.random() * 0xffffff;
-            //     body2.sprite.tint = Math.random() * 0xffffff;
-            //     readyToChange = false;      
-                
-            //     setTimeout(function(){
-            //         readyToChange = true;
-            //     }, 100);
-            // }
+			// body1.sprite.alpha = 0.5 + Math.floor(Math.random() * 5);
+			
+			// if(readyToChange) {
+			//     body1.sprite.tint = Math.random() * 0xffffff;
+			//     body2.sprite.tint = Math.random() * 0xffffff;
+			//     readyToChange = false;      
+				
+			//     setTimeout(function(){
+			//         readyToChange = true;
+			//     }, 100);
+			// }
 
-        }
-
-
-		function mouseDragStart(e) { 
+		},
+		mouseDragStart: function (e) { 
 			game.physics.box2d.mouseDragStart(game.input.activePointer); 
-		}
-
-		function mouseDragMove(e) {  
+		},
+		mouseDragMove: function(e) {  
 			game.physics.box2d.mouseDragMove(game.input.activePointer);  
-		}
-
-		function mouseDragEnd() {   
+		},
+		mouseDragEnd: function() {   
 			game.physics.box2d.mouseDragEnd();    
-		}
-
-		function toggleDebug() {
+		},
+		toggleDebug: function() {
 			shouldDebug = !shouldDebug;
-		}
-		
-
-		function render() {
-            // show debug info
+		},
+		addFieldMobile: function() {
+			if( navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i)){
+	            $('#main').append('<input type="text" class="field" />');
+	            console.log('===  main.js [203] ===');
+	            $(document).on('keypress', '.field', function(){
+	            	// empty the value
+	            	$('.field').val('');
+	            });
+	        }
+		},
+		render: function() {
+			// show debug info
 			if (shouldDebug)
 			{
 				game.debug.box2dWorld();
@@ -219,13 +216,10 @@ var Site;
 				game.debug.pointer(game.input.mousePointer);
 			}
 		}
+	};
 
-
-	}
-  };
-
-  // call init function
-  window.onload = function(){ Site.init(); }
+	// call init function
+	window.onload = function(){ LetterPrototype.init(); }
 
 })(jQuery);
 

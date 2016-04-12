@@ -42,11 +42,6 @@ function mapInit() {
 
     directionsDisplay.setMap(map);
 
-    // calculateAndDisplayRoute(directionsService, directionsDisplay);
-    // document.getElementById('mode').addEventListener('change', function() {
-    //     calculateAndDisplayRoute(directionsService, directionsDisplay);
-    // });
-
     // Multiple Markers
     var markers = [];
 

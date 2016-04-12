@@ -149,7 +149,7 @@ var Site;
         var splitTextAll;
         $('.reset').hide();
 
-        // animate explosion
+        // Animate explosion
         $('.explode').on('click', function(event){
             splitTextAll = new SplitText($('.word span, h1'), {type:"chars"});
             $(splitTextAll.chars).each(function(i, character){
@@ -157,12 +157,12 @@ var Site;
                 TweenMax.to(character, time, {x:R(10, 500), y:R(10, 100), rotation:R(-100, 100), ease: Elastic.easeOut.config(1, 0.5)});
                 function R(max,min){return Math.random()*(max-min)+min};
             });
-            // update button
+            // Update button
             $(this).hide();
             $('.reset').show();
         });
 
-        //clear explosion
+        // Clear explosion
         $('.reset').bind('click', function(event){
             $(splitTextAll.chars).each(function(i, character){
                 var time = R(0.2, 0.5);
@@ -177,8 +177,6 @@ var Site;
                 thisObject.animateTitle();
                 thisObject.animateWords();
             }, 850);
-
-
         });
     }
   };
