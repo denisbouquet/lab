@@ -1,3 +1,4 @@
+
 // Site js object
 var Site;
 
@@ -6,7 +7,7 @@ var Site;
   
   Site = {
 	/**
-	 * Tabs for each product on tactile device
+	 * Lab page
 	 *
 	 */
 	init: function (elt) {
